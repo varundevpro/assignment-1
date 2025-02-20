@@ -1,5 +1,14 @@
 # Puck Editor - Form component
 
+## Dev environment
+- Node - v22.10.0
+- npm - v10.9.0
+
+## Instructions
+
+- Install packages with `npm install`
+- Run with command `npm run dev`
+
 ## Vite Template
 
 Created from React + TypeScript + Vite template that provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
