@@ -1,5 +1,7 @@
 # Puck Editor - Form component
 
+<img width="1432" alt="image" src="https://github.com/user-attachments/assets/551f994a-7ab3-4176-9467-a9c61624ad63" />
+
 ## Dev environment
 - Node - v22.10.0
 - npm - v10.9.0
