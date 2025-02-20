@@ -10,6 +10,7 @@
 
 - Install packages with `npm install`
 - Run with command `npm run dev`
+- And visit the URL shown in the terminal
 
 ## Vite Template
 
