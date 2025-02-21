@@ -1,24 +1,202 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
 
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignment</title>
 
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .top-bar {
+      border-bottom: 1px solid #D0D5DD;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
+
+    section.form {
+      max-width: 1024px;
+      padding: 128px 16px;
+      margin: 0 auto;
+      font-family: sans-serif;
+    }
+
+    section.form * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @media screen and (max-width: 600px) {
+      section.form {
+        padding: 64px 16px;
       }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    }
+
+    section.form h2 {
+      text-align: center;
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -1.2px;
+    }
+
+    @media screen and (max-width: 600px) {
+      section.form h2 {
+        font-size: 28px;
+        letter-spacing: -0.6px;
+      }
+    }
+
+    section.form p.description {
+      text-align: center;
+      font-size: 18px;
+      line-height: 32px;
+      margin-top: 8px;
+      color: #555555;
+    }
+
+    @media screen and (max-width: 600px) {
+      section.form p.description {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    section.form form {
+      max-width: 680px;
+      margin: 64px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    section.form input.default {
+      margin-top: 8px;
+      font-size: 16px;
+      padding: 12px 14px;
+      width: 100%;
+      border: 1px solid #D0D5DD;
+      box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
+    }
+
+    section.form div.field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label.default {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    label.default span.asterisk {
+      padding: 0 0.25em;
+      color: #f63d68;
+    }
+
+    div.text-area-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    div.text-area-field textarea {
+      margin-top: 8px;
+      font-family: inherit;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 12px 14px;
+      width: 100%;
+      min-height: 86px;
+      border: 1px solid #D0D5DD;
+      box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
+      resize: vertical;
+    }
+
+    section.form select {
+      margin-top: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      padding: 12px;
+      width: 100%;
+      border: 1px solid #D0D5DD;
+      box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
+      padding-right: 1.5rem;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.87868 7.12132L8 9.24264L10.1213 7.12132' stroke='rgb(0 0 0 / 90%)' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+      background-size: 24px;
+      background-position: calc(100% - 0.25rem) center;
+      background-repeat: no-repeat;
+    }
+
+    section.form button {
+      appearance: none;
+      background-color: #444ce7;
+      border: 1px solid #444ce7;
+      color: #fafafa;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+      padding: 12px 14px;
+      width: 100%;
+    }
+
+    section.form button:hover {
+      background-color: #3538cd;
+      border-color: #3538cd;
+    }
+
+    div.radio-field h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    div.radio-field h3+div {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    div.radio-field label {
+      display: flex;
+      gap: 10px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    div.radio-field label>input {
+      margin-top: 1px;
+      width: 16px;
+      height: 16px;
+    }
+
+    div.success-message {
+      color: #069506;
+      padding: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

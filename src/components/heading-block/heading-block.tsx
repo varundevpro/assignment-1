@@ -15,5 +15,5 @@ export const HeadingBlock: ComponentConfig<HeadingBlockProps> = {
       readOnly: { resolvedTitle: true },
     };
   },
-  render: ({ resolvedTitle }) => <h1>Resolved {resolvedTitle}</h1>,
+  render: ({ resolvedTitle }) => <h1>{resolvedTitle}</h1>,
 }

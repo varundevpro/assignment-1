@@ -3,14 +3,16 @@ import {Props} from "./puck.config";
 
 export const data: Partial<Data<Props>> = {
   "root": {
-      "props": {}
+      "props": {
+        title: "Editor Assignment"
+      }
   },
   "content": [
       {
           "type": "Form",
           "props": {
               "title": "Contact Form",
-              "description": "We’d love to hear from you. Please fill out this form.",
+              "description": "Hit \"Publish\" to save your edits.",
               "submitButtonText": "Submit",
               "fields": [
                   {

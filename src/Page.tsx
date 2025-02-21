@@ -1,6 +1,5 @@
 import { Button, Data, Render } from "@measured/puck";
 import { config, Props } from "./puck.config";
-import styled from "styled-components";
 
 type PageProps = {
   toggleRoute: () => void,
@@ -10,23 +9,15 @@ type PageProps = {
 export function Page({ toggleRoute, data }: PageProps) {
   return (
     <>
-      <TopBar>
+      <div className="top-bar">
         <Button
           onClick={toggleRoute}
           variant="secondary"
         >
           View editor
         </Button>
-      </TopBar>
+      </div>
       <Render config={config} data={data} />
     </>
   );
 }
-
-const TopBar = styled.div`
-  border-bottom: 1px solid #D0D5DD;
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-`

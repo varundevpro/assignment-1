@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { PuckContext } from '@measured/puck'
 import { FormFieldConfig, FormProps } from "./types";
-import styled from "styled-components";
 
 type RenderFormProps = {
   title: FormProps['title'],
@@ -36,12 +35,12 @@ export const RenderForm = ({ title, description, submitButtonText, fields, puck 
     switch (field.type) {
       case "textarea":
         return (
-          <StyledTextAreaField>
-            <StyledDefaultLabel>
+          <div className="text-area-field">
+            <label className="default">
               {field.label}
-              {field.required === "true" && <StyledAsterisk>*</StyledAsterisk>}
-            </StyledDefaultLabel>
-            <StyledTextarea
+              {field.required === "true" && <span className="asterisk">*</span>}
+            </label>
+            <textarea
               id={fieldId}
               placeholder={field.placeholder}
               value={value}
@@ -49,15 +48,15 @@ export const RenderForm = ({ title, description, submitButtonText, fields, puck 
               required={field.required === "true"}
               className="w-full p-2 border rounded"
             />
-          </StyledTextAreaField>
+          </div>
         );
 
       case "radio":
         return (
-          <StyledRadioField>
+          <div className="radio-field">
             <h3>
               {field.label}
-              {field.required === "true" && <StyledAsterisk>*</StyledAsterisk>}
+              {field.required === "true" && <span className="asterisk">*</span>}
             </h3>
             <div>
               {field.options?.map((option, optionIndex) => (
@@ -74,17 +73,17 @@ export const RenderForm = ({ title, description, submitButtonText, fields, puck 
                 </label>
               ))}
             </div>
-          </StyledRadioField>
+          </div>
         );
 
       case "select":
         return (
           <>
-            <StyledDefaultLabel>
+            <label className="default">
               {field.label}
-              {field.required === "true" && <StyledAsterisk>*</StyledAsterisk>}
-            </StyledDefaultLabel>
-            <StyledSelect
+              {field.required === "true" && <span className="asterisk">*</span>}
+            </label>
+            <select
               id={fieldId}
               value={value}
               onChange={(e) => handleFieldChange(fieldId, e.target.value)}
@@ -97,18 +96,19 @@ export const RenderForm = ({ title, description, submitButtonText, fields, puck 
                   {option.label}
                 </option>
               ))}
-            </StyledSelect>
+            </select>
           </>
         );
 
       default:
         return (
           <>
-            <StyledDefaultLabel>
+            <label className="default">
               {field.label}
-              {field.required === "true" && <StyledAsterisk>*</StyledAsterisk>}
-            </StyledDefaultLabel>
-            <StyledDefaultInput
+              {field.required === "true" && <span className="asterisk">*</span>}
+            </label>
+            <input
+              className="default"
               type={field.type}
               id={fieldId}
               placeholder={field.placeholder}
@@ -122,196 +122,30 @@ export const RenderForm = ({ title, description, submitButtonText, fields, puck 
   };
 
   return (
-    <StyledSection>
-      {title && <StyledHeading>{title}</StyledHeading>}
-      {description && <StyledDescription>{description}</StyledDescription>}
+    <section className="form">
+      {title && <h2>{title}</h2>}
+      {description && <p className="description">{description}</p>}
 
-      <StyledForm onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {fields.map((field, index) => (
-          <StyledField key={index}>
+          <div className="field" key={index}>
             {renderField(field, index)}
-          </StyledField>
+          </div>
         ))}
 
-        <StyledButton
+        <button
           type="submit"
           tabIndex={puck.isEditing ? -1 : undefined}
         >
           {submitButtonText}
-        </StyledButton>
-      </StyledForm>
+        </button>
+      </form>
 
       {submitted && (
-        <StyledSuccessMessage>
+        <div className="success-message">
           Form submitted successfully!
-        </StyledSuccessMessage>
+        </div>
       )}
-    </StyledSection>
+    </section>
   );
 }
-
-const StyledSection = styled.section`
-  max-width: 1024px;
-  padding: 128px 16px;
-  margin: 0 auto;
-  font-family: sans-serif;
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  @media screen and (max-width: 600px) {
-    padding: 64px 16px;
-  }
-`
-
-const StyledHeading = styled.h2`
-  text-align: center;
-  font-size: 48px;
-  font-weight: 600;
-  letter-spacing: -1.2px;
-  
-  @media screen and (max-width: 600px) {
-    font-size: 28px;
-    letter-spacing: -0.6px;
-  }
-`
-
-const StyledDescription = styled.p`
-  text-align: center;
-  font-size: 18px;
-  line-height: 32px;
-  margin-top: 8px;
-  color: #555555;
-  
-  @media screen and (max-width: 600px) {
-    font-size: 16px;
-    line-height: 24px;
-  }
-`
-
-const StyledForm = styled.form`
-  max-width: 680px;
-  margin: 64px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-`
-
-const StyledField = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const StyledTextAreaField = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const StyledDefaultLabel = styled.label`
-  font-size: 14px;
-  font-weight: 600;
-`
-
-const StyledDefaultInput = styled.input`
-  margin-top: 8px;
-  font-size: 16px;
-  padding: 12px 14px;
-  width: 100%;
-  border: 1px solid #D0D5DD;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-  border-radius: 8px;
-`
-
-const StyledAsterisk = styled.span`
-  padding: 0 0.25em;
-  color: #f63d68;
-`
-
-const StyledTextarea = styled.textarea`
-  margin-top: 8px;
-  font-family: inherit;
-  font-size: 16px;
-  line-height: 20px;
-  padding: 12px 14px;
-  width: 100%;
-  min-height: 86px;
-  border: 1px solid #D0D5DD;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-  border-radius: 8px;
-  resize: vertical;
-`
-
-const StyledSelect = styled.select`
-  margin-top: 8px;
-  font-family: inherit;
-  font-size: 15px;
-  padding: 12px;
-  width: 100%;
-  border: 1px solid #D0D5DD;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-  border-radius: 8px;
-
-  padding-right: 1.5rem;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.87868 7.12132L8 9.24264L10.1213 7.12132' stroke='rgb(0 0 0 / 90%)' stroke-linecap='round'/%3E%3C/svg%3E%0A");
-  background-size: 24px;
-  background-position: calc(100% - 0.25rem) center;
-  background-repeat: no-repeat;
-`
-
-const StyledButton = styled.button`
-  appearance: none;
-  background-color: #444ce7;
-  border: 1px solid #444ce7;
-  color: #fafafa;
-  border-radius: 8px;
-
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 12px 14px;
-  width: 100%;
-
-  &:hover {
-    background-color: #3538cd;
-    border-color: #3538cd;
-  }
-`
-
-const StyledRadioField = styled.div`
-  h3 {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  h3 + div {
-    margin-top: 16px;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  label {
-    display: flex;
-    gap: 10px;
-    font-size: 16px;
-    color: #555;
-  }
-
-  label > input {
-    margin-top: 1px;
-    width: 16px;
-    height: 16px;
-  }
-`
-
-const StyledSuccessMessage = styled.div`
-  color: #069506;
-  padding: 12px;
-  text-align: center;
-`
